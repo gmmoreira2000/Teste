@@ -15,10 +15,5 @@ namespace Api.ViewModel
         [Required(ErrorMessage = "O campo sexo é obrigatório")]
         public char Sexo { get; set; }
         public bool Ativo { get;  set; }
-        public Contato MapeiaParaEntidade()
-        {
-            var contato = new Contato(Nome, DataNascimento, Sexo, Ativo);
-            return contato;
-        }
     }
 }

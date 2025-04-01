@@ -1,5 +1,6 @@
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Api.Configurations;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<ContatoContextDb>(options =>
     options.UseSqlServer("DefautlConnection", b => b.MigrationsAssembly("Data"));
     options.UseSqlServer(builder.Configuration["ConnectionString:Location"]);
 });
+
+builder.Services.ResolveDependencias();   
 
 var app = builder.Build();
 

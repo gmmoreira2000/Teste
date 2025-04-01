@@ -1,4 +1,6 @@
-﻿using Api.ViewModel;
+﻿using Api.Configurations;
+using Api.ViewModel;
+using Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
@@ -8,12 +10,18 @@ namespace Api.Controllers
     [Route("api/routes")]
     public class ContatoController : Controller
     {
-        public ContatoController() { }
+        private readonly IContatoRepository _contatoRepository;
+        private readonly MapeadorContatoViewModel _mapeador;
+        public ContatoController(IContatoRepository contatoRepository, MapeadorContatoViewModel mapeador) 
+        { 
+            _contatoRepository = contatoRepository;
+            _mapeador = mapeador;
+        }
 
         [HttpGet]
         public async Task<IEnumerable<ContatoViewModel>> ObterTodods()
         {
-
+            
         }
 
         [HttpGet{"{id:id}"]
