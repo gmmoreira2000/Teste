@@ -18,6 +18,8 @@ builder.Services.AddDbContext<ContatoContextDb>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionString:Location"]);
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.ResolveDependencias();   
 
 var app = builder.Build();
