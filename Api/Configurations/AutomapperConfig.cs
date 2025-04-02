@@ -6,7 +6,7 @@ namespace Api.Configurations
 {
     public class AutomapperConfig : Profile
     { 
-        public AutoMapperConfig()
+        public AutomapperConfig()
         {
             CreateMap<Contato, ContatoViewModel>().ReverseMap();
         }

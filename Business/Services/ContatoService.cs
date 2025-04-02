@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Domain;
+using Data.Repository.Interfaces;
 
 namespace Business.Services
 {

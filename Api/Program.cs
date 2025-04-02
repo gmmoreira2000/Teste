@@ -1,5 +1,6 @@
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Data.Repository.Interfaces;
 using Api.Configurations;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<ContatoContextDb>(options =>
 {
     options.UseSqlServer("DefautlConnection", b => b.MigrationsAssembly("Data"));
     options.UseSqlServer(builder.Configuration["ConnectionString:Location"]);
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

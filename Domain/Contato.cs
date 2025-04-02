@@ -38,7 +38,10 @@ namespace Domain
         public Contato(string nome, DateTime dataNascimento, char sexo, bool ativo = true)
         {
             if (nome == null) throw new ArgumentNullException("O campo nome é obrigatório");
-            nome = nome.Trim();
+            Nome = nome;
+
+            if (sexo == null) throw new ArgumentNullException("O campo sexo é obrigatório");
+            Sexo = sexo;
 
             if(dataNascimento == null) throw new ArgumentNullException("O campo data de nascimento é obrigatório");
 
@@ -54,6 +57,14 @@ namespace Domain
         {
             var contato = new Contato(Nome, DataNascimento, Sexo, Ativo);
             return contato;
+        }
+
+        public void ModificarContato(string nome, DateTime dataNascimento, char sexo, bool ativo)
+        {
+            this.Nome = nome;
+            this.DataNascimento = dataNascimento;
+            this.Sexo = sexo;
+            this.Ativo = ativo;
         }
     }
 }

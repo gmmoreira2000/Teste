@@ -13,9 +13,9 @@ namespace Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Contato> builder) 
         { 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.Id)   ;
             
-            builder.Property(x=> x.Id)
+            builder.Property(x=> x.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(80)");
             

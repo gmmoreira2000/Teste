@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain;
 
-namespace Business.Interfaces
+namespace Data.Repository.Interfaces
 {
     public interface IContatoRepository : IDisposable
     {
