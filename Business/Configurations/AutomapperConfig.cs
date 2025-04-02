@@ -1,11 +1,11 @@
-﻿using Api.ViewModel;
-using AutoMapper;
+﻿using AutoMapper;
+using Business.ViewModels;
 using Domain;
 
-namespace Api.Configurations
+namespace Business.Configurations
 {
     public class AutomapperConfig : Profile
-    { 
+    {
         public AutomapperConfig()
         {
             CreateMap<Contato, ContatoViewModel>().ReverseMap();

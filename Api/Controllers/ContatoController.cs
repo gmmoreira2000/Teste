@@ -1,36 +1,33 @@
 ﻿using Api.Configurations;
-using Api.ViewModel;
-using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using AutoMapper;
-using Domain;
 using Microsoft.EntityFrameworkCore;
+using Business.Interfaces;
+using Business.Services;
+using Business.ViewModels;
 
 namespace Api.Controllers
 {
     [ApiController]
-    [Route("api/routes")]
+    [Route("controller")]
     public class ContatoController : ControllerBase
     {
-        private readonly IContatoRepository _contatoRepository;
-        private readonly IMapper _mapper;
+        private readonly IContatoService _contatoService;
 
-        public ContatoController(IContatoRepository contatoRepository, IMapper mapper)
+        public ContatoController(IContatoService contatoService)
         {
-            _contatoRepository = contatoRepository;
-            _mapper = mapper;
+            _contatoService = contatoService;
         }
 
         [HttpGet("GetAll", Name = "Retorna todos")]
         public async Task<IEnumerable<ContatoViewModel>> ObterTodods()
         {
-            return _mapper.Map<IEnumerable<ContatoViewModel>>(await _contatoRepository.ObterTodos());
+            return await _contatoService.ObterTodos();
         }
 
         private async Task<ContatoViewModel> ObterContato(int id)
         {
-            return _mapper.Map<ContatoViewModel>(await _contatoRepository.ObterPorId(id));
+            return await _contatoService.ObterPorId(id);
         }
 
         [HttpGet("{id:int}", Name = "GetPorId")]
@@ -45,8 +42,7 @@ namespace Api.Controllers
         [HttpPost("Criar")]
         public async Task<ActionResult<ContatoViewModel>> Adicionar(ContatoViewModel contatoViewModel)
         {
-            var contato = _mapper.Map<Contato>(contatoViewModel);
-            await _contatoRepository.Adicionar(contato);
+            await _contatoService.Adicionar(contatoViewModel);
             return contatoViewModel;
         }
 
@@ -66,7 +62,7 @@ namespace Api.Controllers
             contatoAtualizar.Sexo = contatoViewModel.Sexo;
             contatoAtualizar.Ativo = contatoViewModel.Ativo;
 
-            await _contatoRepository.Atualizar(_mapper.Map<Contato>(contatoAtualizar));
+            await _contatoService.Atualizar(contatoAtualizar);
             return contatoAtualizar;
         }
 
@@ -76,7 +72,7 @@ namespace Api.Controllers
             var contatoViewModel = await ObterContato(id);
             if (contatoViewModel == null) return NotFound();
 
-            await _contatoRepository.Remover(id);
+            await _contatoService.Remover(id);
 
             return contatoViewModel;
         }
