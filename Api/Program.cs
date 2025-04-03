@@ -1,8 +1,10 @@
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
-using Data.Repository.Interfaces;
+//using Data.Repository.Interfaces;
+using Business.Configurations;
 using Api.Configurations;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,8 @@ builder.Services.AddDbContext<ContatoContextDb>(options =>
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(AutomapperConfig));
+
 
 builder.Services.ResolveDependencias();   
 
