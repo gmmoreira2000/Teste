@@ -45,7 +45,7 @@ namespace Domain
 
             if(dataNascimento == null) throw new ArgumentNullException("O campo data de nascimento é obrigatório");
 
-            if (DataNascimento > DateTime.Today) throw new Exception("A data de nascimento não pode ser maior do que a data de hoje");
+            if (dataNascimento.Date > DateTime.Today) throw new Exception("A data de nascimento não pode ser maior do que a data de hoje");
             DataNascimento = dataNascimento;
 
             if (Idade < 18) throw new Exception("A idade do contato deve ser maior de 18");
