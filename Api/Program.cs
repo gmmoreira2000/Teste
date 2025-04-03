@@ -1,10 +1,7 @@
+using Api.Configurations;
+using Business.Configurations;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
-//using Data.Repository.Interfaces;
-using Business.Configurations;
-using Api.Configurations;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

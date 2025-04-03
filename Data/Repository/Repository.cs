@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Data.Context;
+﻿using Data.Context;
 using Data.Repository.Interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +29,7 @@ namespace Data.Repository
 
         public async Task<Contato> ObterPorId(int id)
         {
-            return await ContatoSet.FindAsync(id);
+            return await ContatoSet.FindAsync(id) ;
         }
 
         public async Task<List<Contato>> ObterTodos()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business.ViewModels;
+﻿using Business.ViewModels;
 
 namespace Business.Interfaces
 {
@@ -14,6 +9,7 @@ namespace Business.Interfaces
         public Task Remover(int id);
         public Task<ContatoViewModel> ObterPorId(int id);
         public Task<List<ContatoViewModel>> ObterTodos();
+        public Task Desativar(ContatoViewModel contatoViewModel);
 
     }
 }

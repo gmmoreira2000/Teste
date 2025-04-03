@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -37,10 +31,11 @@ namespace Domain
         }
         public Contato(string nome, DateTime dataNascimento, char sexo, bool ativo = true)
         {
-            if (nome == null) throw new ArgumentNullException("O campo nome é obrigatório");
+            nome = nome.Trim();
+            if (nome == null || nome == "") throw new ArgumentNullException("O campo nome é obrigatório");
             Nome = nome;
 
-            if (sexo == null) throw new ArgumentNullException("O campo sexo é obrigatório");
+            if (sexo == null  || sexo == ' ') throw new ArgumentNullException("O campo sexo é obrigatório");
             Sexo = sexo;
 
             if(dataNascimento == null) throw new ArgumentNullException("O campo data de nascimento é obrigatório");

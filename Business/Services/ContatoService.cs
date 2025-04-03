@@ -1,8 +1,8 @@
-﻿using Business.Interfaces;
-using Domain;
-using Data.Repository.Interfaces;
+﻿using AutoMapper;
+using Business.Interfaces;
 using Business.ViewModels;
-using AutoMapper;
+using Data.Repository.Interfaces;
+using Domain;
 
 namespace Business.Services
 {
@@ -44,16 +44,35 @@ namespace Business.Services
 
         public async Task<ContatoViewModel> ObterPorId(int id)
         {
-            var contato = await _contatoRepository.ObterPorId(id);
-            return _mapper.Map<ContatoViewModel>(contato);
+            try
+            {
+                var contato = await _contatoRepository.ObterPorId(id);
+                if (contato == null) throw new Exception("Este contato não existe!");
+                if(!contato.Ativo) throw new Exception("Este contato não pode ser retornado, pois ele esstá inativo!");
+                return _mapper.Map<ContatoViewModel>(contato);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<List<ContatoViewModel>> ObterTodos()
         {
-            var contato = await _contatoRepository.ObterTodos();
+            var obj = await _contatoRepository.ObterTodos();
+            var contato = from o in obj
+                          where o.Ativo == true
+                          select o;
+
             return _mapper.Map<List<ContatoViewModel>>(contato);
         }
-      
+
+        public async Task Desativar(ContatoViewModel contatoViewModel)
+        {
+            contatoViewModel.Ativo = false;
+            await _contatoRepository.Atualizar(_mapper.Map<Contato>(contatoViewModel));
+        }
+
         public void Dispose()
         {
             _contatoRepository?.Dispose();

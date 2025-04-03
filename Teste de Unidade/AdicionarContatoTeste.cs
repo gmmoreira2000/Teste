@@ -1,21 +1,9 @@
-﻿using System;
-using Data;
-using Business;
-using Domain;
-using Api;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Data.Context;
-using Api.Controllers;
-using Data.Repository.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
+﻿using AutoMapper;
 using Business.Services;
 using Business.ViewModels;
+using Data.Repository.Interfaces;
+using Domain;
+using Moq;
 
 namespace Teste_de_Unidade
 {
@@ -47,7 +35,7 @@ namespace Teste_de_Unidade
             contato.Sexo = sexo;
             contato.Ativo = ativo;
 
-            _repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
+            //_repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
 
             await _contatoService.Adicionar(contato);
@@ -59,14 +47,14 @@ namespace Teste_de_Unidade
         [InlineData("Nome 1", "2015-01-03", 'F', true)]
         [InlineData("Nome 2", "2011-07-04", 'M', true)]
         [InlineData("Nome 3", "2009-02-05", 'T', true)]
-        public async Task AdicionarContatoInValidoIdade(string nome, DateTime dataNascimento, char sexo, bool ativo)
+        public async Task AdicionarContatoInvalidoIdade(string nome, DateTime dataNascimento, char sexo, bool ativo)
         {
             var contato = new ContatoViewModel();
             contato.Nome = nome;
             contato.DataNascimento = dataNascimento;
             contato.Sexo = sexo;
             contato.Ativo = ativo;
-            _repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
+           // _repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _contatoService.Adicionar(contato));
@@ -74,10 +62,10 @@ namespace Teste_de_Unidade
         }
 
         [Theory]
-        [InlineData("Nome 1", "2025-04-27", 'F', true)]
+        [InlineData("Nome 1", "2025-04-02", 'F', true)]
         [InlineData("Nome 2", "2025-07-04", 'M', true)]
         [InlineData("Nome 3", "2026-04-03", 'T', true)]
-        public async Task AdicionarContatoInValidoData(string nome, DateTime dataNascimento, char sexo, bool ativo)
+        public async Task AdicionarContatoInvalidoData(string nome, DateTime dataNascimento, char sexo, bool ativo)
         {
             var contato = new ContatoViewModel();
             contato.Nome = nome;

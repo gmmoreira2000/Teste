@@ -1,10 +1,6 @@
-﻿using Api.Configurations;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using Microsoft.EntityFrameworkCore;
-using Business.Interfaces;
-using Business.Services;
+﻿using Business.Interfaces;
 using Business.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
@@ -73,6 +69,17 @@ namespace Api.Controllers
             if (contatoViewModel == null) return NotFound();
 
             await _contatoService.Remover(id);
+
+            return contatoViewModel;
+        }
+
+        [HttpPatch("{id:int}", Name = "DesativarContato")]
+        public async Task<ActionResult<ContatoViewModel>> DesativarContato(int id)
+        {
+            var contatoViewModel = await ObterContato(id);
+            if (contatoViewModel == null) return NotFound();
+
+            await _contatoService.Desativar(contatoViewModel);
 
             return contatoViewModel;
         }
