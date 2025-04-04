@@ -59,11 +59,7 @@ namespace Business.Services
 
         public async Task<List<ContatoViewModel>> ObterTodos()
         {
-            var obj = await _contatoRepository.ObterTodos();
-            var contato = from o in obj
-                          where o.Ativo == true
-                          select o;
-
+            var contato = await _contatoRepository.ObterTodos();
             return _mapper.Map<List<ContatoViewModel>>(contato);
         }
 

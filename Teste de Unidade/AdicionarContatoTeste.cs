@@ -72,7 +72,7 @@ namespace Teste_de_Unidade
             contato.DataNascimento = dataNascimento;
             contato.Sexo = sexo;
             contato.Ativo = ativo;
-            _repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
+            //_repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _contatoService.Adicionar(contato));

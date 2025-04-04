@@ -34,7 +34,7 @@ namespace Data.Repository
 
         public async Task<List<Contato>> ObterTodos()
         {
-            return await ContatoSet.ToListAsync();
+            return await ContatoSet.Where(x => x.Ativo == true).ToListAsync();
         }
 
         public async Task Remover(int id)
