@@ -33,7 +33,6 @@ namespace Teste_de_Unidade
             contato.Nome = nome;
             contato.DataNascimento = dataNascimento;
             contato.Sexo = sexo;
-            contato.Ativo = ativo;
 
             //_repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
@@ -53,7 +52,6 @@ namespace Teste_de_Unidade
             contato.Nome = nome;
             contato.DataNascimento = dataNascimento;
             contato.Sexo = sexo;
-            contato.Ativo = ativo;
            // _repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
             // Act & Assert
@@ -62,7 +60,7 @@ namespace Teste_de_Unidade
         }
 
         [Theory]
-        [InlineData("Nome 1", "2025-04-02", 'F', true)]
+        [InlineData("Nome 1", "2025-04-08", 'F', true)]
         [InlineData("Nome 2", "2025-07-04", 'M', true)]
         [InlineData("Nome 3", "2026-04-03", 'T', true)]
         public async Task AdicionarContatoInvalidoData(string nome, DateTime dataNascimento, char sexo, bool ativo)
@@ -71,7 +69,6 @@ namespace Teste_de_Unidade
             contato.Nome = nome;
             contato.DataNascimento = dataNascimento;
             contato.Sexo = sexo;
-            contato.Ativo = ativo;
             //_repositorio.Setup(r => r.Adicionar(It.IsAny<Contato>()));
 
             // Act & Assert

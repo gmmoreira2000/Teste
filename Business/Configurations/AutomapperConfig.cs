@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.ViewModels;
+using Business.DTOs;
 using Domain;
 
 namespace Business.Configurations
@@ -9,6 +10,8 @@ namespace Business.Configurations
         public AutomapperConfig()
         {
             CreateMap<Contato, ContatoViewModel>().ReverseMap();
+            CreateMap<ContatoViewModel, ContatoDTO>().ReverseMap();
+            CreateMap<ContatoDTO, Contato>().ReverseMap();
         }
     }
 }

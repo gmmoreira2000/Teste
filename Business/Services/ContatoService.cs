@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Business.DTOs;
 using Business.Interfaces;
 using Business.ViewModels;
 using Data.Repository.Interfaces;
@@ -27,7 +28,7 @@ namespace Business.Services
                 throw ex;
             }
         }
-        public async Task Atualizar(ContatoViewModel contatoViewModel)
+        public async Task Atualizar(ContatoDTO contatoViewModel)
         {
             await _contatoRepository.Atualizar(_mapper.Map<Contato>(contatoViewModel));
         }
@@ -42,14 +43,14 @@ namespace Business.Services
             await _contatoRepository.Remover(id);
         }
 
-        public async Task<ContatoViewModel> ObterPorId(int id)
+        public async Task<ContatoDTO> ObterPorIdAtivo(int id)
         {
             try
             {
                 var contato = await _contatoRepository.ObterPorId(id);
                 if (contato == null) throw new Exception("Este contato não existe!");
-                if(!contato.Ativo) throw new Exception("Este contato não pode ser retornado, pois ele esstá inativo!");
-                return _mapper.Map<ContatoViewModel>(contato);
+                if(!contato.Ativo) throw new Exception("Este contato não pode ser retornado, pois ele está inativo!");
+                return _mapper.Map<ContatoDTO>(contato);
             }
             catch (Exception ex)
             {
@@ -57,16 +58,26 @@ namespace Business.Services
             }
         }
 
-        public async Task<List<ContatoViewModel>> ObterTodos()
+        public async Task<ContatoDTO> ObterPorId(int id)
         {
-            var contato = await _contatoRepository.ObterTodos();
-            return _mapper.Map<List<ContatoViewModel>>(contato);
+            
+                var contato = await _contatoRepository.ObterPorId(id);
+                if (contato == null) throw new Exception("Este contato não existe!");
+                return _mapper.Map<ContatoDTO>(contato);
+            
         }
 
-        public async Task Desativar(ContatoViewModel contatoViewModel)
+
+        public async Task<List<ContatoDTO>> ObterTodos()
         {
-            contatoViewModel.Ativo = false;
-            await _contatoRepository.Atualizar(_mapper.Map<Contato>(contatoViewModel));
+            var contato = await _contatoRepository.ObterTodos();
+            return _mapper.Map<List<ContatoDTO>>(contato);
+        }
+
+        public async Task Desativar(ContatoDTO contatoDto)
+        {
+            contatoDto.Ativo = false;
+            await _contatoRepository.Atualizar(_mapper.Map<Contato>(contatoDto));
         }
 
         public void Dispose()
